@@ -25,8 +25,6 @@ public class WeatherConnection
             if (response.IsSuccessStatusCode)
             {
                 string weatherApiResponse = await response.Content.ReadAsStringAsync();
-                //WeatherData? weatherData = JsonConvert.DeserializeObject<WeatherData>(weatherApiResponse);
-                //WeatherData? weatherData2 = JsonSerializer.Deserialize<WeatherData>(weatherApiResponse);
                 var weatherData3 = JsonSerializer.Deserialize<WeatherData>(weatherApiResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 return weatherData3;
             }
