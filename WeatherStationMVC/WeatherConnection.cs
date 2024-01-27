@@ -15,7 +15,7 @@ public class WeatherConnection
     {
         this.apiID = apiID;
     }
-    public async Task<WeatherData> GetWeatherDataAsync(string city)
+    public async Task<WeatherData?> GetWeatherDataAsync(string city)
     {
         using (HttpClient client = new HttpClient())
         {
@@ -25,8 +25,8 @@ public class WeatherConnection
             if (response.IsSuccessStatusCode)
             {
                 string weatherApiResponse = await response.Content.ReadAsStringAsync();
-                var weatherData3 = JsonSerializer.Deserialize<WeatherData>(weatherApiResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                return weatherData3;
+                var weatherData = JsonSerializer.Deserialize<WeatherData>(weatherApiResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                return weatherData;
             }
 
             return null;
