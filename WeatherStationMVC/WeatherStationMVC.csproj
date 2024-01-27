@@ -5,17 +5,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WeatherStation.Infrastracture\WeatherStation.Infrastracture.csproj"/>
-    <ProjectReference Include="..\WeatherStation.Application\WeatherStation.Application.csproj"/>
+    <ProjectReference Include="..\WeatherStation.Infrastracture\WeatherStation.Infrastracture.csproj" />
+    <ProjectReference Include="..\WeatherStation.Application\WeatherStation.Application.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1"/>
-    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.5.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
