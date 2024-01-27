@@ -1,0 +1,18 @@
+# Ignore bin and obj directories
+*bin/
+*obj/
+
+/home/filip/Projects/WeatherStationMVC/bin
+/home/filip/Projects/WeatherStationMVC/obj
+
+/WeatherStation.Infrastracture/bin
+/WeatherStation.Infrastracture/obj
+
+
+/WeatherStation.Entity/bin
+/WeatherStation.Entity/obj
+
+
+/WeatherStation.Application/bin
+/WeatherStation.Application/obj
+
