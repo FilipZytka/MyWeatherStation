@@ -1,0 +1,17 @@
+@model WeatherData
+@{
+    ViewData["Title"] = "Results";
+}
+
+<div class="row">
+    <div class=" col-md-4"></div>
+    <p><strong>City:</strong> @Model?.Name</p>
+    <p><strong>Temperature:</strong> @Model?.Main?.Temp°C</p>
+    <p><strong>Humidity:</strong> @Model?.Main?.Humidity%</p>
+    <p><strong>Pressure:</strong> @Model?.Main?.Pressure Pa</p>
+    <p><strong>Clouds:</strong> @Model?.Clouds?.All </p>
+ 
+    
+    
+    
+</div>
