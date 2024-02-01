@@ -2,9 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using WeatherStation.Infrastracture;
 using Microsoft.OpenApi.Models;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 //
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
