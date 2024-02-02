@@ -12,7 +12,7 @@ namespace WeatherStationMVC.Controllers
     {
         private readonly ILogger<WeatherController> _logger;
         private readonly WeatherConnection _weatherConnection;
-        private string _name;
+      
 
         
         public WeatherController(ILogger<WeatherController> logger)
@@ -29,14 +29,14 @@ namespace WeatherStationMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Submit(string Name)
         {
-            _name = Name;
-            if (string.IsNullOrEmpty(_name))
+            
+            if (string.IsNullOrEmpty(Name))
             {
                 ModelState.AddModelError("Name", "City name is required.");
                 return View();
             }
-            _name = Name;
-            WeatherData weatherData = await _weatherConnection.GetWeatherDataAsync(_name);
+  
+            WeatherData weatherData = await _weatherConnection.GetWeatherDataAsync(Name);
 
 
             return View("Results", weatherData);

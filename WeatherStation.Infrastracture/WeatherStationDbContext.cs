@@ -1,5 +1,6 @@
 using WeatherStation.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace WeatherStation.Infrastracture 
 {
@@ -10,6 +11,7 @@ namespace WeatherStation.Infrastracture
             
         }
         public DbSet<WeatherLog> WeatherLogs { get; set; }
+        
 
 
     }
