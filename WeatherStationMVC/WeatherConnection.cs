@@ -1,6 +1,5 @@
 using WeatherStationMVC.Models;
 
-using WeatherStationMVC.Models;
 using System.Text.Json;
 
 

@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using WeatherStation.Infrastracture;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore;
+using WeatherStation.Infrastracture.Extensions;
+
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,11 +17,11 @@ builder.Services.AddSwaggerGen();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<WeatherStationDbContext>(options =>
-{
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"), 
-                      b => b.MigrationsAssembly("WeatherStationMVC"));
-});
+builder.Services.AddWeatherDatabase(builder.Configuration);
+
+//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<WeatherStationMVCIdentityDbContext>();
+
+
 
 var app = builder.Build();
 
