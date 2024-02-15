@@ -1,22 +1,34 @@
 using Microsoft.EntityFrameworkCore;
-using WeatherStation.Infrastracture;
-using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity;
+using WeatherStationMVC.Data;
+using WeatherStation.Entity;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
 //
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<WeatherStationDbContext>(options =>
+
+builder.Services.AddDbContext<AuthDbContext>(options =>
 {
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"), 
-                      b => b.MigrationsAssembly("WeatherStationMVC"));
+    //options.UseSqlite(builder.Configuration.GetConnectionString("AuthDbContextConnection"),
+    //                b => b.MigrationsAssembly("WeatherStationMVC"));
+    options.UseSqlite(builder.Configuration.GetConnectionString("AuthDbContextConnection"));
+});
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<AuthDbContext>();
+
+builder.Services.AddRazorPages();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
 });
 
 var app = builder.Build();
@@ -48,5 +60,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
 
 app.Run();

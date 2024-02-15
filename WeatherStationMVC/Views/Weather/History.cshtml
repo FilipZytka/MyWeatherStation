@@ -1,0 +1,70 @@
+﻿@using WeatherStation.Entity;
+@using WeatherStationMVC.Controllers;
+@using Microsoft.AspNetCore.Identity;
+
+@model IEnumerable<WeatherLog>
+
+@{
+    ViewData["Title"] = "History";
+}
+<h2>History</h2>
+
+<table class="content-table">
+    <thead>
+        @if (Model.Any())
+        {
+            <tr>
+                <th class="col-md-3">
+                    Date
+                </th>
+                <th class="col-md-3">
+                    Temperature
+                </th>
+                <th class="col-md-3">
+                    Humidity
+                </th>
+                <th class="col-md-3">
+                    Pressure
+                </th>
+            </tr>
+        }
+        else {
+            <tr>
+                There is no data here!
+            </tr>
+        }
+    </thead>
+
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-md-3">
+                    @Html.DisplayFor(model => item.Date)
+                </td>
+                <td class="col-md-3">
+                    @Html.DisplayFor(model => item.Temperature)°C
+                </td>
+                <td class="col-md-3">
+                    @Html.DisplayFor(model => item.Humidity)%
+                </td>
+                <td class="col-md-3">
+                    @Html.DisplayFor(model => item.Pressure) Pa
+                </td>
+                <td>
+                    <form asp-action="Delete" asp-controller="Weather" method="post">
+                        <input type="hidden" name="Id" value="@item.Id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+

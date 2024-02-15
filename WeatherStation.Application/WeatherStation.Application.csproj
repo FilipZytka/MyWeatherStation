@@ -1,5 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\WeatherStation.Entity\WeatherStation.Entity.csproj" />
   </ItemGroup>
   <PropertyGroup>

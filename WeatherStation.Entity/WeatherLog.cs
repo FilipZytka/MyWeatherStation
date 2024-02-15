@@ -1,14 +1,23 @@
-
+using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
 
 namespace WeatherStation.Entity
 {
     public class WeatherLog
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
-        public int Temperature { get; set; }
+        public double Temperature { get; set; }
+        public float Humidity { get; set; }
+        public float Pressure { get; set; }
+        public double WindSpeed { get; set; }
+        public string UserId { get; set; }
 
-        
+        [ForeignKey("UserId")]
+        public ApplicationUser User { get; set; }
+     
+
+
     }
 }

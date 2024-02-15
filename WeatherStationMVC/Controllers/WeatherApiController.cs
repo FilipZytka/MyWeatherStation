@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WeatherStation.Entity;
 using WeatherStationMVC.Models;
 
 namespace WeatherStationMVC.Controllers
@@ -13,9 +14,11 @@ namespace WeatherStationMVC.Controllers
     {
     
         private readonly WeatherConnection _weatherConnection;
+
         public WeatherApiController()
         {
-        _weatherConnection = new WeatherConnection();
+           
+            _weatherConnection = new WeatherConnection();
         }
         
         [HttpGet]
