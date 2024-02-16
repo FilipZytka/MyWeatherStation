@@ -2,8 +2,8 @@
 @using WeatherStationMVC.Controllers;
 @using Microsoft.AspNetCore.Identity;
 
-@model IEnumerable<WeatherLog>
-
+@* @model IEnumerable<WeatherLog> *@
+@model PaginatedList<WeatherLog>
 @{
     ViewData["Title"] = "History";
 }
@@ -28,7 +28,8 @@
                 </th>
             </tr>
         }
-        else {
+        else
+        {
             <tr>
                 There is no data here!
             </tr>
@@ -64,6 +65,35 @@
 
     </tbody>
 </table>
+@{
+    var previousDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+
+<a asp-action="PrintLogsForActiveUser" asp-route-pageNumber="@(1)" class="btn btn-default @previousDisabled">
+    First
+</a>
+
+@{
+
+    int startPage = Math.Max(1, Model.PageIndex - 4);
+    int endPage = Math.Min(Model.TotalPages, Model.PageIndex + 4);
+}
+@for (int i = startPage; i <= endPage; i++)
+{
+    <a asp-action="PrintLogsForActiveUser" asp-route-pageNumber="@i" class="btn btn-default @(i == Model.PageIndex ? "active" : "")">
+        @i
+    </a>
+}
+<a asp-action="PrintLogsForActiveUser" asp-route-pageNumber="@(Model.TotalPages)" class="btn btn-default @nextDisabled">
+    Last
+</a>
+
+
+
+
+
 
 
 

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using WeatherStationMVC.Models;
 using WeatherStation.Entity;
 using WeatherStationMVC.Data;
 using WeatherStation.Infrastracture;
@@ -61,15 +60,19 @@ namespace WeatherStationMVC.Controllers
             return View("Create");  
         }
         [HttpGet]
-        public async Task<IActionResult> PrintLogsForActiveUser(IEnumerable<WeatherLog> weatherLog)
+        public async Task<IActionResult> PrintLogsForActiveUser(IEnumerable<WeatherLog> weatherLog, int? pageNumber)
         {
+            int pageSize = 5;
             var currentUser = _userManager.GetUserId(User);
             weatherLog = await _dataLogger.GetWeatherLogs();
             var userLogs = weatherLog.Where(ul => ul.UserId == currentUser);
-            
-            return View("History", userLogs);
+
+            return View("History", PaginatedList<WeatherLog>
+                .Create(_dbContext.WeatherLogs.ToList(), pageNumber ?? 1, pageSize));
+           // return View("History", userLogs);
         }
-       
+        [HttpPost]
+    
         public async Task<IActionResult> Delete(WeatherLog weatherLog)
         {
             var weatherLogToDelete = _dbContext.WeatherLogs
