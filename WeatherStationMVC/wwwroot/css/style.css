@@ -36,10 +36,9 @@ h2, a {
 }
 
 .container-button {
-  
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 35%;
+    position: absolute;
+    width:100%;
+    padding-top: 40%;
 
 }
 
@@ -127,8 +126,10 @@ footer {
     top: 35%;
     left: 50%;
     display: flex;
+    flex-direction:row;
     justify-content: space-around;
     gap: 10px;
+
 }
 
 .mycontainer {
@@ -141,11 +142,12 @@ footer {
     flex-direction: column;
     justify-content: space-around;
     position: relative;
-    font-size: 16px;
+    font-size: 1rem;
     border-radius: 1rem;
     background-color: #2658b4c7;
     border-bottom: 10px solid #66c2ff;
 }
+
 
 .tagcontainer {
     width: 20vmin;
@@ -203,7 +205,7 @@ button i.fa-trash {
 }
 
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1920px) {
     .wrapper {
         width: 85vw;
     }
@@ -211,21 +213,33 @@ button i.fa-trash {
     .mycontainer {
         height: 26vmin;
         width: 26vmin;
-        font-size: 12px;
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 1920px) {
+    .wrapper {
+        width: 80vw;
+    }
+
+    .mycontainer {
+        height: 26vmin;
+        width: 26vmin;
+        font-size: 0.6rem;
     }
 }
 
 @media screen and (max-width: 768px) {
     .wrapper {
-        width: 90vw;
-        flex-wrap: wrap;
+        width: 75vw;
         gap: 30px;
+        flex-direction:row;
     }
 
     .mycontainer {
-        width: calc(50% - 40px);
+
         height: 30vmin;
-        font-size: 14px;
+        font-size: 0.5rem;
     }
 }
 
@@ -235,11 +249,12 @@ button i.fa-trash {
     }
 
     .mycontainer {
-        width: 100%;
-        height: 100%;
-        font-size: 8px;
+        width: 10%;
+        height: 10%;
+        font-size: 0.2rem;
     }
 }
+
 
 .hidden {
     opacity: 0;

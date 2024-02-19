@@ -16,7 +16,7 @@ namespace WeatherStation.Infrastracture.Extension
         {
             services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(
                 configuration
-                .GetConnectionString("SqlServerConnection")
+                .GetConnectionString("DefaultConnection")
                 
                 ));
         }
