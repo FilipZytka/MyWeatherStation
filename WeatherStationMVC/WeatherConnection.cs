@@ -10,8 +10,6 @@ public class WeatherConnection
     private readonly string apiUrl = "https://api.openweathermap.org/data/2.5/weather";
     private WeatherData _weatherData;
 
-
-
     public async Task<WeatherData?> GetWeatherDataAsync(string city)
     {
         using (HttpClient client = new HttpClient())
@@ -28,7 +26,6 @@ public class WeatherConnection
             }
             return null;
         }
-
     }
     public WeatherLog SaveWeatherDataToLog(WeatherLog weatherLog)
     {
@@ -36,7 +33,10 @@ public class WeatherConnection
         weatherLog.Humidity = _weatherData.Main.Humidity;
         weatherLog.Pressure = _weatherData.Main.Pressure;
         weatherLog.WindSpeed = _weatherData.Wind.Speed;
-
+        weatherLog.Country = _weatherData.Sys.Country;
+        weatherLog.WeatherName = _weatherData.Weather[0].Main;
+        weatherLog.City = _weatherData.Name;
+       
         return weatherLog;
 
     }

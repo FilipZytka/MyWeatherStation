@@ -2,11 +2,80 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to WeatherStation! This application lets you check the weather in every major city around the world!</h1>
+<div id="home">
+    <div class="landing-text">
+        <section class="hidden">
+        <h1>Your reliable Weather Station!</h1>
+        <h3>Fetch weather conditions from any place around the world!</h3>
+@*         <form class="d-flex" asp-route-returnUrl="@Url.Action("Create", "Weather", new { area = "" })" method="post">
+            <button class="btn btn-outline-info me-2" type="submit">Log out</button>
+        </form> *@
+        </section>
+    </div>
 </div>
-<br>
-<div class="text-center">
-    <h1 class="display-4">Consider creating an account so you can track your weather logs!</h1>
+<div class="padding">
+    <div class="container">
+        <div class="row">
+           
+            <div class="col-sm-6">
+                <section class="hidden"> <img src="/img/sun2.png"></section>
+            </div>
+            <div class="col-sm-6 text-center">
+                <section class="hidden">
+                <h2>
+                    Made with <a href="https://openweathermap.org/api">OpenWeathermap API </a>
+                </h2>
+                <p class="lead">Utilized OpenWeather API to integrate real-time weather data, enhancing user experience with dynamic and personalized weather information.</p> </section>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <section class="hidden">
+                <h2>Microsoft .NET Entity Framework Core used for backend</h2>
+                <p class="lead">Implemented ASP.NET MVC with Entity Framework and Identity Framework, creating a robust and secure foundation for seamless data management and user authentication. </p>
+                </section>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 img-responsive">
+                <section class="hidden">
+                <img src="img/csharp.png" class="img-responsive">
+                </section>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <section class="hidden">
+                <h2>Microsoft SQL Server</h2>
+                <p class="lead">Utilized Microsoft SQL Server to establish scalable database backend, ensuring efficient data storage, retrieval, and management. </p>
+                </section>
 
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <section class="hidden">
+                <img src="img/sql.png" class="img-responsive">
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="fixed">
+</div>
+<div class="padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <section class="hidden">
+                <h2>Website hosting in the Cloud</h2>
+                <p class="lead">Website hosted on Microsoft Azure, leveraging its cloud infrastructure for reliable, scalable, and secure web hosting, ensuring optimal performance and accessibility.</p>
+                </section>
+
+            </div>
+            <div class="col-sm-6">
+                <section class="hidden">
+                <img src="/img/azure.png">
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

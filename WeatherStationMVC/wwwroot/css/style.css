@@ -1,0 +1,257 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+
+h2, a {
+    text-decoration:none;
+    color: black;
+    
+}
+.nav-tabs li a{
+    color:black;
+
+}
+.navbar {
+    background-color: #03304e;
+    padding: 0.75rem;
+    font-size: 1.2em;
+    border-bottom: 2px black;
+}
+
+.navbar-brand {
+    min-height: 60px;
+    padding: 0 15px 5px;
+}
+
+.lead {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.table-transparent-borders th,
+.table-transparent-borders td {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.container-button {
+  
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 35%;
+
+}
+
+    .container-button, button {
+       
+    }
+  
+
+#home {
+    padding-top: 3rem;
+    background: url(/img/background.jpg) no-repeat center center fixed;
+    background-color: white;
+    display: table;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+}
+
+.landing-text {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bolder;
+    color: black;
+    font-size: larger;
+    padding-bottom: 30%;
+}
+
+    .landing-text h1 {
+        font-size: 500%;
+        font-weight: 700;
+    }
+
+    .landing-text h3 {
+        font-size: 200%;
+        font-weight: 600;
+    }
+
+.padding {
+    padding: 80px 0px;
+}
+
+    .padding img {
+        width: 70%;
+    }
+
+#fixed {
+    background: url(/img/background.jpg) center center fixed;
+    display: table;
+    height: 60%;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+}
+
+footer {
+    width: 100%;
+    background-color: #03304e;
+    padding: 5% 5% 10% 5%;
+    color: #FFF;
+}
+
+.fa {
+    padding: 15px;
+    font-size: 25px;
+    color: #fff;
+}
+
+    .fa:hover {
+        color: #D5D5D5;
+        text-decoration: none;
+    }
+
+.icon {
+    max-width: 200px;
+}
+
+.wrapper {
+  
+    position: absolute;
+    width: 80vw;
+    height: 0vw;
+    transform: translate(-50%, 50%);
+    top: 35%;
+    left: 50%;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.mycontainer {
+    flex-wrap: wrap;
+    word-break: break-all;
+    display: flex;
+    flex-basis: calc(33.33% - 20px);
+    width: 30vmin;
+    height: 30vmin;
+    flex-direction: column;
+    justify-content: space-around;
+    position: relative;
+    font-size: 16px;
+    border-radius: 1rem;
+    background-color: #2658b4c7;
+    border-bottom: 10px solid #66c2ff;
+}
+
+.tagcontainer {
+    width: 20vmin;
+    height: 20vmin;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: relative;
+    font-size: 16px;
+    border-radius: 1rem;
+    border-bottom: 10px solid #66c2ff;
+}
+
+i {
+    color: rgb(255, 255, 255);
+    font-size: 2.5em;
+    text-align: center;
+}
+
+span.num {
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    font-size: 3em;
+}
+
+span.text {
+    color: #e0e0e0;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 0.7em 0;
+    font-weight: 700;
+    line-height: 0;
+}
+
+.card-header {
+    padding: 0px;
+    padding-bottom: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.category-log {
+    padding: 1rem;
+    font-weight: bolder;
+    color: black;
+    font-size: 2.5rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 2rem;
+}
+
+button i.fa-trash {
+    font-size: 14px;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .wrapper {
+        width: 85vw;
+    }
+
+    .mycontainer {
+        height: 26vmin;
+        width: 26vmin;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        width: 90vw;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .mycontainer {
+        width: calc(50% - 40px);
+        height: 30vmin;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .wrapper {
+        gap: 10px;
+    }
+
+    .mycontainer {
+        width: 100%;
+        height: 100%;
+        font-size: 8px;
+    }
+}
+
+.hidden {
+    opacity: 0;
+    transition: all 1s;
+}
+
+.show {
+    opacity: 1;
+}
+
+@media(prefers-reduced-motion) {
+    .hidden {
+        transition: none;
+    }
+}

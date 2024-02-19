@@ -1,94 +1,154 @@
 ﻿@using WeatherStation.Entity;
 @using WeatherStationMVC.Controllers;
 @using Microsoft.AspNetCore.Identity;
+@using WeatherStationMVC.Pagination;
 
-@* @model IEnumerable<WeatherLog> *@
 @model PaginatedList<WeatherLog>
 @{
     ViewData["Title"] = "History";
-}
-<h2>History</h2>
 
-<table class="content-table">
-    <thead>
+
+}
+
+<div id="home">
+    <div class="container mt-5">
+        <h2 class="category-log">A list of your recent weather findings</h2>
+        <section class="hidden">
+            <table class="table table-responsive table-bordered table-borderless table-hover text-center text-capitalize border-white  border border-3">
+            
+            <thead>
+
+                @if (Model.Any())
+                {
+                        <tr class="table-white table-active text-uppercase text-black border-white  border border-3">
+                            <th class="col-md-1 border-white  border border-3">
+                            Date
+                        </th>
+                            <th class="col-md-1 border-white  border border-3">
+                            Temperature
+                        </th>
+                            <th class="col-md-1 border-white  border border-3">
+                            Humidity
+                        </th>
+                            <th class="col-md-1 border-white  border border-3">
+                            Pressure
+                        </th>
+                            <th class="col-md-1 border-white  border border-3">
+                            Weather
+                        </th>
+                            <th class="col-md-1 border-white  border border-3">
+                            Country
+                        </th>
+                            <th class="col-md-1 border-white  border border-3">
+                            Town
+                        </th>
+                            <th class="col-md-1 border-white  border border-3">
+
+                        </th>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        There is no data here!
+                    </tr>
+                }
+            </thead>
+            <tbody>
+
+                    @foreach (var item in Model)
+                {
+                        <tr class="table-white table-active text-dark fw-bold border-white border border-3">
+                            <td class="col-md-2  border-white  border border-3">
+                            @Html.DisplayFor(model => item.Date)
+                        </td>
+                            <td class="col-md-2  border-white  border border-3">
+                            @Html.DisplayFor(model => item.Temperature)°C
+                        </td>
+                            <td class="col-md-2  border-white  border border-3">
+                            @Html.DisplayFor(model => item.Humidity)%
+                        </td>
+                            <td class="col-md-1 border-white  border border-3">
+                            @Html.DisplayFor(model => item.Pressure) hPa
+                        </td>
+                            <td class="col-md-1  border-white  border border-3">
+                            @Html.DisplayFor(model => item.WeatherName)
+                        </td>
+                            <td class="col-md-1 border-white  border border-3">
+                            @Html.DisplayFor(model => item.Country)
+                        </td>
+                            <td class="col-md-3  border-white  border border-3">
+                            @Html.DisplayFor(model => item.City)
+                        </td>
+                        <td class="col-md-2">
+                            <form asp-action="Delete" asp-controller="Weather" method="post">
+                                <input type="hidden" name="Id" value="@item.Id" />
+                                <button type="submit" class="btn btn-info "><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        </section>
+        @{
+            var previousDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
         @if (Model.Any())
         {
-            <tr>
-                <th class="col-md-3">
-                    Date
-                </th>
-                <th class="col-md-3">
-                    Temperature
-                </th>
-                <th class="col-md-3">
-                    Humidity
-                </th>
-                <th class="col-md-3">
-                    Pressure
-                </th>
-            </tr>
+            <a asp-action="PrintLogsForActiveUser" asp-route-pageNumber="@(1)" class="btn btn-info @previousDisabled">
+                <strong>First</strong>
+            </a>
+
+
+            if (Model.PageIndex == 1)
+            {
+                Model.EndPage = Math.Min(Model.TotalPages, Model.PageIndex + (Model.PageDelta + 1));
+            }
+            else
+            {
+                Model.EndPage = Math.Min(Model.TotalPages, Model.PageIndex + Model.PageDelta);
+            }
+
+
+            if (Model.EndPage != Model.TotalPages && Model.PageIndex + 1 > 0)
+            {
+                Model.StartPage = Math.Max(1, Model.PageIndex - 1);
+            }
+            else if (Model.PageIndex > Model.PageDelta + 1)
+            {
+                Model.StartPage = Model.TotalPages - Model.PageDelta - 1;
+            }
+            else
+            {
+                Model.StartPage = 1;
+            }
+
+            @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+            {
+                <a asp-action="PrintLogsForActiveUser" asp-route-pageNumber="@i" class="btn btn-info  @(i == Model.PageIndex ? "active" : "")">
+                    <strong>@i</strong>
+                </a>
+            }
+            <a asp-action="PrintLogsForActiveUser" asp-route-pageNumber="@(Model.TotalPages)" class="btn btn-info  @nextDisabled">
+               <strong> Last</strong>
+            </a>
         }
-        else
-        {
-            <tr>
-                There is no data here!
-            </tr>
-        }
-    </thead>
+    </div>
+</div>
 
 
-    <tbody>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td class="col-md-3">
-                    @Html.DisplayFor(model => item.Date)
-                </td>
-                <td class="col-md-3">
-                    @Html.DisplayFor(model => item.Temperature)°C
-                </td>
-                <td class="col-md-3">
-                    @Html.DisplayFor(model => item.Humidity)%
-                </td>
-                <td class="col-md-3">
-                    @Html.DisplayFor(model => item.Pressure) Pa
-                </td>
-                <td>
-                    <form asp-action="Delete" asp-controller="Weather" method="post">
-                        <input type="hidden" name="Id" value="@item.Id" />
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
-        }
-
-    </tbody>
-</table>
-@{
-    var previousDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-}
 
 
-<a asp-action="PrintLogsForActiveUser" asp-route-pageNumber="@(1)" class="btn btn-default @previousDisabled">
-    First
-</a>
 
-@{
 
-    int startPage = Math.Max(1, Model.PageIndex - 4);
-    int endPage = Math.Min(Model.TotalPages, Model.PageIndex + 4);
-}
-@for (int i = startPage; i <= endPage; i++)
-{
-    <a asp-action="PrintLogsForActiveUser" asp-route-pageNumber="@i" class="btn btn-default @(i == Model.PageIndex ? "active" : "")">
-        @i
-    </a>
-}
-<a asp-action="PrintLogsForActiveUser" asp-route-pageNumber="@(Model.TotalPages)" class="btn btn-default @nextDisabled">
-    Last
-</a>
+
+
+
+
 
 
 

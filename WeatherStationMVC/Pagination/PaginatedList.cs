@@ -1,11 +1,14 @@
 ﻿using System.Drawing.Printing;
 
-namespace WeatherStationMVC
+namespace WeatherStationMVC.Pagination
 {
     public class PaginatedList<T> : List<T>
     {
         public int PageIndex { get; set; }
         public int TotalPages { get; set; }
+        public int PageDelta { get; set; } = 5;
+        public int EndPage { get; set; }
+        public int StartPage { get; set; }
         public bool HasPreviousPage
         {
             get
@@ -30,7 +33,8 @@ namespace WeatherStationMVC
         public static PaginatedList<T> Create(List<T> list, int pageIndex, int pageSize)
         {
             var count = list.Count;
-            var items = list.Skip((pageIndex-1)*pageSize).Take(pageSize).ToList();
+            var items = list.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+      
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
 
         }

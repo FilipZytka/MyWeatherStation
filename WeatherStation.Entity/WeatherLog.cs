@@ -16,7 +16,10 @@ namespace WeatherStation.Entity
 
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
-       // public string WeatherName {  get; set; }
+        public string WeatherName {  get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+
 
 
 

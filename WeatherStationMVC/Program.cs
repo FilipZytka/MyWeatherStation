@@ -1,7 +1,8 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using WeatherStationMVC.Data;
 using WeatherStation.Entity;
+using WeatherStation.Infrastracture.Extension;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,15 +14,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.AddDbContext<AuthDbContext>(options =>
-{
-    //options.UseSqlite(builder.Configuration.GetConnectionString("AuthDbContextConnection"),
-    //                b => b.MigrationsAssembly("WeatherStationMVC"));
-    options.UseSqlite(builder.Configuration.GetConnectionString("AuthDbContextConnection"));
-});
+builder.Services.AddDatabase(builder.Configuration);
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<AuthDbContext>();
+
 
 builder.Services.AddRazorPages();
 

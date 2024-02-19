@@ -5,6 +5,7 @@ using WeatherStation.Infrastracture;
 using System.Data.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using WeatherStationMVC.Pagination;
 
 namespace WeatherStationMVC.Controllers
 {
@@ -16,6 +17,7 @@ namespace WeatherStationMVC.Controllers
         private readonly WeatherConnection _weatherConnection;
         private readonly UserManager<ApplicationUser> _userManager;
         private WeatherDataLogger _dataLogger;
+        private PaginationConfig _paginationConfig;
         
         public WeatherController(ILogger<WeatherController> logger, AuthDbContext dbContext, UserManager<ApplicationUser> userManager)
         {
@@ -24,6 +26,7 @@ namespace WeatherStationMVC.Controllers
             _dataLogger = new WeatherDataLogger(_dbContext);
             _logger = logger;
             _weatherConnection = new WeatherConnection();
+            _paginationConfig = new PaginationConfig();
         }
         [HttpGet]
         public IActionResult Create()
@@ -41,7 +44,7 @@ namespace WeatherStationMVC.Controllers
         
             if (string.IsNullOrEmpty(Name))
             {
-                ModelState.AddModelError("Name", "City name is required.");
+                ModelState.AddModelError("Name", "Valid town name is required.");
                 return View("Create");
             }
             var weatherData = await _weatherConnection.GetWeatherDataAsync(Name);
@@ -54,7 +57,6 @@ namespace WeatherStationMVC.Controllers
                 
                  _weatherConnection.SaveWeatherDataToLog(weatherLog);
                 await _dataLogger.AddLogToDbContext(weatherLog);
-                //return RedirectToAction(nameof(PrintLogsForActiveUser));
                 return View("Results", weatherData);
             }
             return View("Create");  
@@ -62,17 +64,16 @@ namespace WeatherStationMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> PrintLogsForActiveUser(IEnumerable<WeatherLog> weatherLog, int? pageNumber)
         {
-            int pageSize = 5;
             var currentUser = _userManager.GetUserId(User);
             weatherLog = await _dataLogger.GetWeatherLogs();
-            var userLogs = weatherLog.Where(ul => ul.UserId == currentUser);
+            var userLogs = _dbContext.WeatherLogs.Where(ul => ul.UserId == currentUser).OrderByDescending(d => d.Date);
 
             return View("History", PaginatedList<WeatherLog>
-                .Create(_dbContext.WeatherLogs.ToList(), pageNumber ?? 1, pageSize));
-           // return View("History", userLogs);
+                .Create(userLogs.ToList(), pageNumber ?? 1, _paginationConfig.PageSize));
+
         }
         [HttpPost]
-    
+   
         public async Task<IActionResult> Delete(WeatherLog weatherLog)
         {
             var weatherLogToDelete = _dbContext.WeatherLogs
